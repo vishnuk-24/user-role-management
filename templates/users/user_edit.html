@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <style>
+    /* Improved CSS styles for better appearance */
+    h2 {
+      color: #007bff; /* Use a shade of blue */
+      font-size: 28px; /* Slightly larger font size */
+      margin-bottom: 20px; /* Add space below the heading */
+      text-align: center;
+    }
+
+    section {
+      display: flex;
+      justify-content: center;
+    }
+
+    .user-edit-form {
+      width: 400px; /* Adjust the width of the form */
+      margin-top: 50px;
+      padding: 20px;
+      background-color: #ffffff; /* White background */
+      border-radius: 8px; /* Slightly rounded corners */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft box shadow */
+    }
+
+    .user-edit-form label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 8px; /* Add space below each label */
+      color: #333; /* Dark text color */
+      font-size: 14px; /* Reduce label font size */
+    }
+
+    .user-edit-form input[type="text"],
+    .user-edit-form input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px; /* Add more space below each input */
+      border: 1px solid #ccc; /* Light border */
+      border-radius: 5px;
+      box-sizing: border-box; /* Ensure padding is included in the width */
+      font-size: 14px; /* Reduce input font size */
+    }
+
+    .user-edit-form button[type="submit"] {
+      background-color: #28a745; /* Green color for Save button */
+      color: white;
+      padding: 12px 24px; /* Slightly larger padding */
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px; /* Keep button font size slightly larger */
+    }
+  </style>
+
+  
+  <h2>Edit User</h2>
+  <section>
+    <form class="user-edit-form" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Save</button>
+    </form>
+  </section>
+{% endblock %}

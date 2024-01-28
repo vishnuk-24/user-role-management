@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% comment %} {% load staticfiles %} {% endcomment %}
+
+{% block content %}
+  <style>
+      .registration-form {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          margin-top: 50px;
+      }
+
+      .registration-form label {
+          color: #333;
+          font-weight: bold;
+      }
+
+      .registration-form input[type="text"],
+      .registration-form input[type="email"],
+      .registration-form input[type="password"],
+      .registration-form select {
+          width: 300px;
+          padding: 10px;
+          margin-bottom: 20px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+      }
+
+      .registration-form button[type="submit"] {
+          background-color: #4CAF50;
+          color: white;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+      }
+
+      .registration-form button[type="submit"]:hover {
+          background-color: #45a049;
+      }
+
+      .error {
+        background: orangered;
+        color: #fff;
+        padding: 5px;
+        margin: 5px;
+      }
+  </style>
+
+  <div class="registration-form" >
+    <h2>Registration</h2>
+    <form method="post" onsubmit="return validateForm()", id="reg-form">
+        <div class="msg"></div>
+        {% if error %}
+          <div class="msg">
+            <p class="error">{{ error }}</p>
+          </div>
+        {% endif %}
+          {% csrf_token %}
+          <label for="firstname">First Name:</label>
+          <input type="text" id="firstname" name="firstname"><br><br>
+          <label for="lastname">Last Name:</label>
+          <input type="text" id="lastname" name="lastname"><br><br>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email"><br><br>
+          <label for="role">Role:</label>
+          <select id="role" name="role">
+              <option value="student">Student</option>
+              <option value="staff">Staff</option>
+              <option value="admin">Admin</option>
+              <option value="editor">Editor</option>
+          </select><br><br>
+          <label for="nationality">Nationality:</label>
+          <input type="text" id="nationality" name="nationality"><br><br>
+          <label for="mobile">Mobile:</label>
+          <input type="text" id="mobile" name="mobile"><br><br>
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password"><br><br>
+          <button type="submit">Register</button>
+      </form>
+      <p>Already have an account? <a href="{% url 'users:login' %}">Login</a></p>
+  </div>
+
+  <script>
+    function validateForm() {
+      const firstname = document.getElementById("firstname").value;
+      const lastname = document.getElementById("lastname").value;
+      const email = document.getElementById("email").value;
+      const role = document.getElementById("role").value;
+      const nationality = document.getElementById("nationality").value;
+      const mobile = document.getElementById("mobile").value;
+      const password = document.getElementById("password").value;
+      const msg = document.querySelector('.msg');
+
+      // Regular expressions for validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const mobileRegex = /^\d{10}$/;
+      const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+      
+      // Check if any field is empty
+      if (!firstname || !lastname || !email || !role || !nationality || !mobile || !password) {
+          msg.classList.add('error');
+          msg.innerHTML = 'Please enter all fields';
+    
+          // Remove error after 3 seconds
+          setTimeout(() => msg.remove(), 3000);
+        
+          return false;
+      }
+
+      // Validate email
+      if (!emailRegex.test(email)) {
+          msg.classList.add('error');
+          msg.innerHTML = 'Please enter a valid email address';
+          setTimeout(() => msg.remove(), 3000);
+          return false;
+      }
+
+      // Validate mobile number
+      if (!mobileRegex.test(mobile)) {
+          msg.classList.add('error');
+          msg.innerHTML = 'Please enter a valid 10-digit mobile number';
+          setTimeout(() => msg.remove(), 3000);
+          return false;
+      }
+
+      // Validate password
+      if (!passwordRegex.test(password)) {
+          msg.classList.add('error');
+          msg.innerHTML = 'Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, and one digit';
+          setTimeout(() => msg.remove(), 3000);
+          return false;
+      }
+  
+      return true;
+    }
+  </script>
+{% endblock content%}

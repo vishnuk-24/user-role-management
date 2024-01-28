@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <style>
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 50px;
+  }
+
+  .login-form label {
+      color: #333;
+      font-weight: bold;
+  }
+
+  .login-form input[type="text"],
+  .login-form input[type="email"],
+  .login-form input[type="password"],
+  .login-form select {
+      width: 300px;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+  }
+
+  .login-form button[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+  }
+
+  .login-form button[type="submit"]:hover {
+      background-color: #45a049;
+  }
+
+  .error {
+    background: orangered;
+    color: #fff;
+    padding: 5px;
+    margin: 5px;
+  }
+
+  </style>
+
+  <div class="login-form" >
+    <h2>Login</h2>
+    <form method="post" method="post" onsubmit="return validateForm()", id="login-form">
+      {% csrf_token %}
+
+      <div class="msg"></div>
+      {% if error %}
+        <div class="msg">
+          <p class="error">{{ error }}</p>
+        </div>
+      {% endif %}
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required><br>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required><br>
+      <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="{% url 'users:registration' %}">Register</a></p>
+  </div>
+
+  <script>
+    function validateForm() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const msg = document.querySelector('.msg');
+      
+      // Regular expressions for validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+      
+      if (email == "" || password == "") {
+          msg.classList.add('error');
+          msg.innerHTML = 'Please enter all fields';
+
+          // Remove error after 3 seconds
+          setTimeout(() => msg.remove(), 3000);
+
+          return false;
+      }
+
+      // Validate email
+      if (!emailRegex.test(email)) {
+          msg.classList.add('error');
+          msg.innerHTML = 'Please enter a valid email address';
+          setTimeout(() => msg.remove(), 3000);
+          return false;
+      }
+
+      // Validate password
+      if (!passwordRegex.test(password)) {
+          msg.classList.add('error');
+          msg.innerHTML = 'Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, and one digit';
+          setTimeout(() => msg.remove(), 3000);
+          return false;
+      }
+      return true;
+    }
+  </script>
+
+{% endblock %}

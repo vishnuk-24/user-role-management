@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <style>
+    /* Improved CSS styles for better appearance */
+    .student-details {
+      margin-top: 50px;
+      padding: 20px;
+      background-color: #f2f2f2;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .student-details h2 {
+      color: #007bff; /* Use a shade of blue for heading */
+      margin-bottom: 20px;
+    }
+
+    .student-details h3 {
+      color: #333;
+      font-weight: bold;
+      margin-bottom: 10px; /* Add space below heading */
+    }
+
+    .student-details ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .student-details li {
+      margin-bottom: 10px;
+      font-size: 16px; /* Adjusted font size for better readability */
+    }
+  </style>
+
+  <div class="student-details">
+    <h2>Welcome, Student!</h2>
+    <h3>Student Details:</h3>
+    <ul>
+      <li>First Name: {{ users.first_name }}</li>
+      <li>Last Name: {{ users.last_name }}</li>
+      <li>Email: {{ users.email }}</li>
+      <li>Nationality: {{ users.nationality }}</li>
+      <li>Mobile Number: {{ users.mobile_number }}</li>
+    </ul>
+  </div>
+{% endblock %}

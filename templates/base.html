@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Academy</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #333;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            color: white;
+            margin-left: auto;
+        }
+
+        .user-info img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .logout-btn {
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            padding: 1px 1px; /* Adjusted padding to make it smaller */
+            border-radius: 43px;
+            cursor: pointer;
+            font-size: 15px; /* Adjusted font size */
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="{% url 'users:dashboard' %}" class="logo">Academy</a>
+        {% if user.is_authenticated %}
+            <div class="user-info">
+                <img src="#" alt="User Icon">
+                <a href="{% url 'users:profile' pk=user.pk %}">{{ user.get_short_name }}</a>
+                <button class="logout-btn">
+                    <a href="{% url 'users:logout' %}">Logout</a>
+                </button>
+            </div>
+        {% else %}
+            <a href="{% url 'users:registration' %}">Register</a>
+            <a href="{% url 'users:login' %}">Login</a>
+            <a href="{% url 'users:dashboard' %}">Dashboard</a>
+        {% endif %}
+    </div>
+    <hr>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

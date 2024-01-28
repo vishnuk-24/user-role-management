@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <style>
+    /* Improved CSS styles for better appearance */
+    .student-details {
+      margin-top: 50px;
+      padding: 20px;
+      background-color: #f2f2f2;
+      border-radius: 5px;
+    }
+
+    .student-details h2 {
+      color: #007bff; /* Use a shade of blue for heading */
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .student-details h3 {
+      color: #333;
+      font-weight: bold;
+      margin-bottom: 10px; /* Add space below heading */
+    }
+
+    .student-details table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px; /* Add space above the table */
+    }
+
+    .student-details th,
+    .student-details td {
+      padding: 12px; /* Slightly larger padding */
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .student-details th {
+      background-color: #f2f2f2;
+    }
+
+    .student-details tr:hover {
+      background-color: #f5f5f5;
+    }
+  </style>
+
+  <div class="student-details">
+    <h2>Welcome, Staff!</h2>
+    <h3>Student Details:</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Nationality</th>
+          <th>Mobile Number</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr>
+          <td>{{ user.first_name }}</td>
+          <td>{{ user.last_name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.nationality }}</td>
+          <td>{{ user.mobile_number }}</td>
+          <td>{{ user.role }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

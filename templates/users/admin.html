@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <style>
+    /* Improved CSS styles for better appearance */
+    .content {
+      text-align: center; /* Center the content */
+    }
+
+    .student-details {
+      margin-top: 50px;
+      padding: 20px;
+      background-color: #f2f2f2;
+      border-radius: 5px;
+    }
+
+    .admin-details {
+      color: #333;
+      font-weight: bold;
+      margin-bottom: 20px; /* Add space below heading */
+    }
+
+    .admin-details table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px; /* Add space above the table */
+    }
+
+    .admin-details th,
+    .admin-details td {
+      padding: 12px; /* Slightly larger padding */
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .admin-details th {
+      background-color: #f2f2f2;
+    }
+
+    .admin-details tr:hover {
+      background-color: #f5f5f5;
+    }
+
+    .admin-details .action-column {
+      width: 100px;
+    }
+
+    .admin-details .action-column a {
+      color: #007bff; /* Use a shade of blue */
+      text-decoration: none;
+    }
+  </style>
+
+  <div class="content">
+    <h2>Welcome, Admin!</h2>
+    <div class="admin-details">
+        <h3>Student, Staff, and Editor Details:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Nationality</th>
+                    <th>Mobile Number</th>
+                    <th>Role</th>
+                    <th class="action-column">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.first_name }}</td>
+                    <td>{{ user.last_name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.nationality }}</td>
+                    <td>{{ user.mobile_number }}</td>
+                    <td>{{ user.role }}</td>
+                    <td class="action-column"><a href="/edit/{{ user.id }}">Edit</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+  </div>
+{% endblock %}
