@@ -1,4 +1,4 @@
-# exclude: "^docs/|/migrations/|^venv/|^static/|"
+exclude: "^docs/|/migrations/|^.env/|^static/|"
 default_stages: [pre-commit, pre-push]
 
 repos:

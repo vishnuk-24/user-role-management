@@ -99,15 +99,15 @@
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       const mobileRegex = /^\d{10}$/;
       const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-      
+
       // Check if any field is empty
       if (!firstname || !lastname || !email || !role || !nationality || !mobile || !password) {
           msg.classList.add('error');
           msg.innerHTML = 'Please enter all fields';
-    
+
           // Remove error after 3 seconds
           setTimeout(() => msg.remove(), 3000);
-        
+
           return false;
       }
 
@@ -134,7 +134,7 @@
           setTimeout(() => msg.remove(), 3000);
           return false;
       }
-  
+
       return true;
     }
   </script>

@@ -74,11 +74,11 @@
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
       const msg = document.querySelector('.msg');
-      
+
       // Regular expressions for validation
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-      
+
       if (email == "" || password == "") {
           msg.classList.add('error');
           msg.innerHTML = 'Please enter all fields';

@@ -1,7 +1,7 @@
 # Installation
 
   ## Clone this repository to your local machine:
-    
+
   ```bash
     git clone https://github.com/vishnuk-24/user-role-management.git
   ```
@@ -15,9 +15,9 @@
 Before you start working on this project, it's essential to set up a virtual environment. A virtual environment is a self-contained Python environment that isolates your project's dependencies from the system-wide Python installation. This helps maintain a clean and consistent environment for your project.
 
 To create a virtual environment, open a terminal and navigate to your project directory. Run the following command to create a virtual environment named 'env':
-  
+
   For Windows:
-  
+
   ```bash
   virtualenv env
   ```
@@ -35,7 +35,7 @@ To create a virtual environment, open a terminal and navigate to your project di
   deactivate
   ```
   To install the project's dependencies from the requirements.txt file within the virtual environment, use the following command
-  
+
   ```bash
   pip install -r requirements.txt
   ```
@@ -87,7 +87,7 @@ You can interact with your Django project and its models using the Django shell.
 3. Activate your virtual environment if you haven't already done so. You can activate it using the following command:
 
     For Windows:
-    
+
     ```bash
     .\.env\Scripts\activate
     ```
